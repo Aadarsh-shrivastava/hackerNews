@@ -1,13 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 
 :root {
-  background-color: #ffffff;
-
-  color-scheme: light dark;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-
   font-synthesis: none;
   font-weight: 400;
+  height: 100vh;
   line-height: 1.5;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -19,9 +16,33 @@
   --grey: #f2f2f2;
 }
 
-body {
-  display: flex;
+*,
+*::before,
+*::after {
+  border: none;
+  box-sizing: border-box;
   margin: 0;
-  min-height: 100vh;
-  min-width: 320px;
+  padding: 0;
+}
+
+/* elemetns */
+
+html {
+  font-family: "Work Sans", sans-serif;
+  font-size: 100%;
+  overflow: auto;
+}
+
+body {
+  background-color: var(--background);
+  height: 100vh;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+html {
+  scrollbar-width: none;
 }

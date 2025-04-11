@@ -1,0 +1,9 @@
+.newstory-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.newstory-body {
+  flex: 1;
+}

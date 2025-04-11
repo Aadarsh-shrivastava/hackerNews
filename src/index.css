@@ -1,9 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 
 :root {
-  background-color: #ffffff;
-
-  color-scheme: light dark;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 
   font-synthesis: none;
@@ -18,7 +15,6 @@
   --black-text: #000;
   --grey-text: #0007;
   --grey: #f2f2f2;
-  color: #000;
 }
 
 *,

@@ -6,7 +6,7 @@ export const NewStoryPage = () => {
   return (
     <div className="newstory-container">
       <Header />
-      <div className="newstory-body"></div>
+      <div className="newstory-body">asdasdasd</div>
       <Footer />
     </div>
   );

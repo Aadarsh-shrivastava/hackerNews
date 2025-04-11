@@ -1,0 +1,14 @@
+.load-more-button {
+  align-content: center;
+  background-color: var(--primary-color);
+  border-radius: 12px;
+  bottom: 120px; /* or wherever you want it vertically */
+  font-size: 16px;
+  font-weight: 700;
+  left: 18px;
+  margin: 0 auto;
+  min-height: 48px;
+  right: 18px;
+  text-align: center;
+  width: 90%;
+}

@@ -1,12 +1,12 @@
 import { Header } from "../../components/Header/Header";
 import { Footer } from "../../components/Footer/Footer";
-import "./NewStoriesPage.css";
+import "./HomePage.css";
 
-export const NewStoryPage = () => {
+export const Homepage = () => {
   return (
-    <div className="newstory-container">
+    <div className="homepage-container">
       <Header />
-      <div className="newstory-body">asdasdasd</div>
+      <div className="homepage-body"></div>
       <Footer />
     </div>
   );

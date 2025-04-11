@@ -1,12 +1,8 @@
 import "./App.css";
-import { NewStoryPage } from "./pages/NewsStoryPage/NewStoriesPage";
+import { Homepage } from "./pages/HomePage/HomePage";
 
 function App() {
-  return (
-    <>
-      <NewStoryPage />
-    </>
-  );
+  return <Homepage />;
 }
 
 export default App;

@@ -1,9 +1,9 @@
-.newstory-container {
+.homepage-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
 
-.newstory-body {
+.homepage-body {
   flex: 1;
 }

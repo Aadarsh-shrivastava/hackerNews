@@ -5,6 +5,8 @@ import { LoadMoreButton } from "../LoadMoreButton/LoadMoreButton";
 import { NewsCard } from "../NewsCard/NewsCard";
 import { Chip } from "../chip/Chip";
 import { storyTypeChips } from "../../constants/chipData";
+import { Dots } from "react-activity";
+import "react-activity/dist/library.css";
 import "./Feed.css";
 
 export const Feed = () => {
@@ -31,6 +33,12 @@ export const Feed = () => {
       {stories.map((story) => (
         <NewsCard key={story.id} story={story} />
       ))}
+
+      {loading && (
+        <div className="activity-indicator">
+          <Dots />
+        </div>
+      )}
 
       {/* load more button, only visible when there are more stories to fetch */}
       {!loading && stories.length > 0 && hasMore && (

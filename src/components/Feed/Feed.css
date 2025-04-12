@@ -7,3 +7,8 @@
   padding: 18px;
   scrollbar-width: none;
 }
+
+.chips-container {
+  display: flex;
+  gap: 10px;
+}

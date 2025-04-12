@@ -11,7 +11,7 @@ export const Feed = () => {
       {stories.map((story) => (
         <NewsCard key={story.id} story={story} />
       ))}
-      <LoadMoreButton onClick={loadMore} />
+      {!loading && stories.length > 0 && <LoadMoreButton onClick={loadMore} />}
     </div>
   );
 };

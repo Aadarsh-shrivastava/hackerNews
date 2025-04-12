@@ -8,14 +8,20 @@ interface NewsCardProps {
 }
 export const NewsCard = ({ story }: NewsCardProps) => {
   return (
-    <div className="news-card casts-shadow">
-      <div className="news-title">
-        <a href={story.url}>{story.title}</a>
+    <a
+      href={story.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="news-card-container casts-shadow block no-underline text-inherit"
+    >
+      <div className="news-title">{story.title}</div>
+      <div className="news-description">
+        Lorem Ipsum has been the industry's standard dummy text ever since the
+        1500s...
       </div>
-      <div className="news-description">{`Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, …when an unknown printer took a galley of type and scrambled`}</div>
       <div className="time-and-author">
         {timeAgo(story.time)} | {story.by}
       </div>
-    </div>
+    </a>
   );
 };

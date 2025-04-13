@@ -35,7 +35,7 @@ export const Feed = () => {
       ))}
 
       {loading && (
-        <div className="activity-indicator">
+        <div className="activity-indicator" data-testid="loading-indicator">
           <Dots />
         </div>
       )}

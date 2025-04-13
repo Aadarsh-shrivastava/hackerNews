@@ -12,6 +12,7 @@ export const Chip = ({ chip, isSelected, onClick }: ChipProps) => {
     <div
       className={`chip-container ${isSelected ? "selected" : ""}`}
       onClick={() => onClick(chip)}
+      data-testid={`chip-${chip.name}`}
     >
       {chip.name}
     </div>

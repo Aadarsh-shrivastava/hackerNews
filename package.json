@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "jest --passWithNoTests",
-    "test-coverage": "jest --passWithNoTests --coverage",
+    "test-coverage": "jest --passWithNoTests --coverage"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^8.29.1",

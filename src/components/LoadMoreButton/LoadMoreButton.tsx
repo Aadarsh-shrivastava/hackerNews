@@ -10,13 +10,14 @@ export const LoadMoreButton = ({
   isEnabled = true,
 }: LoadMoreButtonProps) => {
   return (
-    <div
+    <button
       className={`load-more-button ${isEnabled && "button-enabled"} `}
       onClick={() => {
-        isEnabled && onClick && onClick();
+        onClick && onClick();
       }}
+      disabled={!isEnabled}
     >
       Load More
-    </div>
+    </button>
   );
 };

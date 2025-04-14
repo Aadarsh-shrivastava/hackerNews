@@ -29,45 +29,39 @@ export const Feed = () => {
           />
         ))}
       </div>
-      
+
       {/* news card list component */}
       {stories.map((story) => (
         <NewsCard key={story.id} story={story} />
       ))}
 
-      {/* Initial Loading State */}
-      {loading && stories.length === 0 && (
-        <>
+      <>
+        {loading && (
           <div className="activity-indicator">
             <Dots />
           </div>
-          <LoadMoreButton isEnabled={false} />
-        </>
-      )}
+        )}
 
-      {/* Fallback when no stories exist */}
-      {!loading && stories.length === 0 && (
-        <div className="fallback-message">
-          No stories available at the moment. Please check back later.
-        </div>
-      )}
-
-      {/* Load More or Loader */}
-      {stories.length > 0 && (
-        <>
-          {loading && (
-            <div className="activity-indicator">
-              <Dots />
+        {stories.length === 0 ? (
+          loading ? (
+            <LoadMoreButton isEnabled={false} />
+          ) : (
+            <div className="fallback-message">
+              No stories available at the moment. Please check back later.
             </div>
-          )}
-
-          {!loading && hasMore && <LoadMoreButton onClick={loadMore} />}
-
-          {!loading && !hasMore && (
-            <div className="end-of-feed-message">You’ve reached the end.</div>
-          )}
-        </>
-      )}
+          )
+        ) : (
+          <>
+            {hasMore
+              ? !loading && <LoadMoreButton onClick={loadMore} />
+              : !loading && (
+                  <div className="end-of-feed-message">
+                    You've reached the end.
+                  </div>
+                )}
+          </>
+        )}
+      </>
     </div>
   );
 };

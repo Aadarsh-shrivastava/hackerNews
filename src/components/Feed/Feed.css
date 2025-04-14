@@ -17,7 +17,8 @@
   margin: auto;
 }
 
-.fallback-message{
+.fallback-message,
+.end-of-feed-message {
   font-weight: bolder;
   margin: auto;
   text-align: center;

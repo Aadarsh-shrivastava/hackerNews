@@ -18,5 +18,7 @@
 }
 
 .fallback-message{
+  font-weight: bolder;
   margin: auto;
+  text-align: center;
 }

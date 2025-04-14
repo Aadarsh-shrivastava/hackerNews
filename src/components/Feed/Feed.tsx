@@ -48,7 +48,7 @@ export const Feed = () => {
         ? !loading && (
             <div className="fallback-message">
               There are no stories available at the moment. Please check back
-              later..
+              later.
             </div>
           )
         : !loading && hasMore && <LoadMoreButton onClick={loadMore} />}

@@ -1,5 +1,4 @@
 import React from "react";
-import { useMemo, useState } from "react";
 import { useStories } from "../../hooks/useStories";
 import { LoadMoreButton } from "../LoadMoreButton/LoadMoreButton";
 import { NewsCard } from "../NewsCard/NewsCard";
@@ -8,14 +7,15 @@ import { storyTypeChips } from "../../constants/chipData";
 import { Dots } from "react-activity";
 import "react-activity/dist/library.css";
 import "./Feed.css";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const Feed = () => {
-  const [selectedChip, setSelectedChip] = useState(storyTypeChips[0]);
-
-  const selectedKeyword = useMemo(() => selectedChip.keyword, [selectedChip]);
+  const { feedtype } = useParams();
+  const navigate = useNavigate();
   const { stories, loading, loadMore, hasMore } = useStories(
-    `${selectedKeyword}`
+    `${feedtype}stories`
   );
+
   return (
     <div className="feed-container">
       {/* list of cswitchable tab chips */}
@@ -24,12 +24,12 @@ export const Feed = () => {
           <Chip
             key={chip.name}
             chip={chip}
-            isSelected={chip.name === selectedChip.name}
-            onClick={setSelectedChip}
+            isSelected={chip.keyword === feedtype}
+            onClick={() => navigate(`/${chip.keyword}`)}
           />
         ))}
       </div>
-      
+
       {/* news card list component */}
       {stories.map((story) => (
         <NewsCard key={story.id} story={story} />

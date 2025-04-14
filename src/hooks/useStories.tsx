@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { Story } from "../types/News";
 
-const STORY_BATCH_SIZE = 10;
+const STORY_BATCH_SIZE = 5;
 
 // custom hook to fetch a list of ids first, based on those ids fetch list of paginated stories
 export function useStories(type = "newstories") {

@@ -8,6 +8,7 @@ import { storyTypeChips } from "../../constants/chipData";
 import { Dots } from "react-activity";
 import "react-activity/dist/library.css";
 import "./Feed.css";
+import { Story } from "../../types/News";
 
 export const Feed = () => {
   const [selectedChip, setSelectedChip] = useState(storyTypeChips[0]);
@@ -31,37 +32,36 @@ export const Feed = () => {
       </div>
 
       {/* news card list component */}
-      {stories.map((story) => (
-        <NewsCard key={story.id} story={story} />
-      ))}
+      {stories.length > 0 &&
+        stories.map((story) => <NewsCard key={story.id} story={story} />)}
 
-      <>
-        {loading && (
-          <div className="activity-indicator">
-            <Dots />
+      <div className={`activity-indicator ${loading ? "" : "hidden"}`}>
+        <Dots />
+      </div>
+
+      {!loading && (
+        <>
+          <div
+            className={`fallback-message ${stories.length === 0 ? "" : "hidden"}`}
+          >
+            No stories available at the moment. Please check back later.
           </div>
-        )}
 
-        {stories.length === 0 ? (
-          loading ? (
-            <LoadMoreButton isEnabled={false} />
-          ) : (
-            <div className="fallback-message">
-              No stories available at the moment. Please check back later.
-            </div>
-          )
-        ) : (
-          <>
-            {hasMore
-              ? !loading && <LoadMoreButton onClick={loadMore} />
-              : !loading && (
-                  <div className="end-of-feed-message">
-                    You've reached the end.
-                  </div>
-                )}
-          </>
-        )}
-      </>
+          <div
+            className={`end-of-feed-message ${stories.length > 0 && !hasMore ? "" : "hidden"}`}
+          >
+            You've reached the end.
+          </div>
+        </>
+      )}
+
+      {hasMore && (
+        <LoadMoreButton
+          onClick={loadMore}
+          isEnabled={stories.length > 0 && !loading}
+          isVisible={!loading || !stories.length}
+        />
+      )}
     </div>
   );
 };

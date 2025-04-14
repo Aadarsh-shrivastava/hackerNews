@@ -8,7 +8,6 @@ import { storyTypeChips } from "../../constants/chipData";
 import { Dots } from "react-activity";
 import "react-activity/dist/library.css";
 import "./Feed.css";
-import { Story } from "../../types/News";
 
 export const Feed = () => {
   const [selectedChip, setSelectedChip] = useState(storyTypeChips[0]);

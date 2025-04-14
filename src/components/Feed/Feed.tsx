@@ -18,6 +18,7 @@ export const Feed = () => {
   );
   return (
     <div className="feed-container">
+      
       {/* list of cswitchable tab chips */}
       <div className="chips-container">
         {storyTypeChips.map((chip) => (
@@ -29,21 +30,28 @@ export const Feed = () => {
           />
         ))}
       </div>
+
       {/* news card list component */}
       {stories.map((story) => (
         <NewsCard key={story.id} story={story} />
       ))}
 
+      {/* show activity indicator when there are more stories being loaded */}
       {loading && (
         <div className="activity-indicator">
           <Dots />
         </div>
       )}
 
-      {/* load more button, only visible when there are more stories to fetch */}
-      {!loading && stories.length > 0 && hasMore && (
-        <LoadMoreButton onClick={loadMore} />
-      )}
+      {/* load more button, only visible when there are more stories to fetch else show a fallback message*/}
+      {stories.length === 0
+        ? !loading && (
+            <div className="fallback-message">
+              There are no stories available at the moment. Please check back
+              later..
+            </div>
+          )
+        : !loading && hasMore && <LoadMoreButton onClick={loadMore} />}
     </div>
   );
 };

@@ -34,31 +34,24 @@ export const Feed = () => {
       {stories.length > 0 &&
         stories.map((story) => <NewsCard key={story.id} story={story} />)}
 
-      <div className={`activity-indicator ${loading ? "" : "hidden"}`}>
-        <Dots />
-      </div>
-
-      {!loading && (
-        <>
-          <div
-            className={`fallback-message ${stories.length === 0 ? "" : "hidden"}`}
-          >
-            No stories available at the moment. Please check back later.
-          </div>
-
-          <div
-            className={`end-of-feed-message ${stories.length > 0 && !hasMore ? "" : "hidden"}`}
-          >
-            You've reached the end.
-          </div>
-        </>
+      {loading ? (
+        <div className="activity-indicator ">
+          <Dots />
+        </div>
+      ) : stories.length ? (
+        !hasMore && (
+          <div className="end-of-feed-message">You've reached the end.</div>
+        )
+      ) : (
+        <div className="fallback-message">
+          No stories available at the moment. Please check back later.
+        </div>
       )}
 
-      {hasMore && (
+      {hasMore && (!loading || !stories.length) && (
         <LoadMoreButton
           onClick={loadMore}
           isEnabled={stories.length > 0 && !loading}
-          isVisible={!loading || !stories.length}
         />
       )}
     </div>

@@ -47,7 +47,7 @@ export function useStories(type = "newstories") {
       setErrors(newStories.errors);
       setNextIndex(firstBatch.length);
     } catch (err: any) {
-      setErrors([{ id: -1, message: "Failed to fetch stories" }]);
+      setErrors([{ id: -1, message: err.message || 'Unknow error occured' }]);
     } finally {
       setLoading(false);
     }
@@ -94,7 +94,7 @@ export function useStories(type = "newstories") {
         if (!res.ok) {
           return {
             story: null,
-            error: { id, message: `HTTP error ${res.status}` },
+            error: { id, message: `unable to fetch stories.` },
           };
         }
 

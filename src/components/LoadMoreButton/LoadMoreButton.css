@@ -10,7 +10,7 @@
   min-height: 48px;
   right: 18px;
   text-align: center;
-  width: 100%;
+  width: 300px;
 }
 
 .button-enabled {
@@ -21,4 +21,10 @@
 .button-enabled:active {
   box-shadow: none;
   transform: translateY(1px);
+}
+
+@media (max-width: 400px) {
+  .load-more-button {
+    min-width: 100%;
+  }
 }

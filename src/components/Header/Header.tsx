@@ -4,8 +4,8 @@ import "./Header.css";
 
 export const Header = () => {
   return (
-    <div className="header-container casts-shadow">
+    <a className="header-container casts-shadow" href="/">
       <img src={Logo} />
-    </div>
+    </a>
   );
 };

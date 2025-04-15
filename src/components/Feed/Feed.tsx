@@ -12,13 +12,20 @@ import { useNavigate, useParams } from "react-router-dom";
 export const Feed = () => {
   const { feedtype } = useParams();
   const navigate = useNavigate();
-  const { stories, loading, loadMore, hasMore } = useStories(
-    `${feedtype}stories`
+  const { stories, loading, loadMore, hasMore, errors } = useStories(
+    `${feedtype}`
   );
 
+  if (!loading && errors.length) {
+    return (
+      <div className="feed-container">
+        <span className="fallback-message">{errors[0].message}</span>
+      </div>
+    );
+  }
   return (
     <div className="feed-container">
-      {/* list of cswitchable tab chips */}
+      {/* list of switchable tab chips */}
       <div className="chips-container">
         {storyTypeChips.map((chip) => (
           <Chip
@@ -55,4 +62,5 @@ export const Feed = () => {
         />
       )}
     </div>
- );
+  );
+};

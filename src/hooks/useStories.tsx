@@ -25,7 +25,6 @@ export function useStories(type = "newstories") {
 
     try {
       if (!storyTypeChips.some((chip) => chip.keyword === type)) {
-        console.log(type);
         throw new Error(
           "The page you are looking for does not exist. Please go back to the homepage."
         );

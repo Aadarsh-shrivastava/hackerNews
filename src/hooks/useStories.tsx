@@ -29,13 +29,13 @@ export function useStories(type = "newstories") {
       );
 
       if (!res.ok) {
-        throw new Error("Failed to fetch stories");
+        throw new Error("Failed to fetch stories.");
       }
 
       const ids = await res.json();
 
       if (!Array.isArray(ids)) {
-        throw new Error("Invalid data format");
+        throw new Error("Invalid data format.");
       }
 
       setAllIds(ids);
@@ -47,7 +47,7 @@ export function useStories(type = "newstories") {
       setErrors(newStories.errors);
       setNextIndex(firstBatch.length);
     } catch (err: any) {
-      setErrors([{ id: -1, message: err.message || 'Unknow error occured' }]);
+      setErrors([{ id: -1, message: err.message || "Unknow error occured." }]);
     } finally {
       setLoading(false);
     }
@@ -57,7 +57,7 @@ export function useStories(type = "newstories") {
   useEffect(() => {
     if (storyTypeChips.some((chip) => chip.keyword === type)) {
       init().catch(() => {
-        setErrors([{ id: -1, message: "Couldn't fetch story IDs" }]);
+        setErrors([{ id: -1, message: "Couldn't fetch story IDs." }]);
         setLoading(false); // optional but safe
       });
     } else {
@@ -103,7 +103,7 @@ export function useStories(type = "newstories") {
         if (!data || typeof data !== "object") {
           return {
             story: null,
-            error: { id, message: "Invalid JSON or empty response" },
+            error: { id, message: "Invalid JSON or empty response." },
           };
         }
 
@@ -111,7 +111,7 @@ export function useStories(type = "newstories") {
       } catch (err: any) {
         return {
           story: null,
-          error: { id, message: err.message || "Unknown fetch error" },
+          error: { id, message: err.message || "Unknown fetch error." },
         };
       }
     });

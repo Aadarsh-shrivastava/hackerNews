@@ -48,7 +48,7 @@ export const Feed = () => {
         </div>
       )}
 
-      {hasMore && (!loading || !stories.length) && (
+      {hasMore && !loading && (
         <LoadMoreButton
           onClick={loadMore}
           isEnabled={stories.length > 0 && !loading}

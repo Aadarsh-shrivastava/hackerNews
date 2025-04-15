@@ -64,7 +64,7 @@ export function useStories(type = "newstories") {
   return {
     stories,
     loadMore,
-    hasMore: nextIndex === 0 && loading ? true : nextIndex < allIds.length,
+    hasMore: nextIndex < allIds.length,
     loading,
   };
 }

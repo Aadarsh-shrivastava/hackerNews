@@ -1,8 +1,11 @@
 .header-container {
   align-items: center;
+  background-color: white;
   display: flex;
   flex-direction: row;
   height: 51px;
   justify-content: center;
+  position: fixed;
+  top: 0;
   width: 100%;
 }

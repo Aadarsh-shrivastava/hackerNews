@@ -19,9 +19,7 @@ export const Feed = () => {
   if (!loading && errors.length) {
     return (
       <div className="feed-container">
-        <span className="fallback-message">
-          {errors[0].message} Please try again later
-        </span>
+        <span className="fallback-message">{errors[0].message}</span>
       </div>
     );
   }

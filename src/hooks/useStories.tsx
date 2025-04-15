@@ -24,18 +24,23 @@ export function useStories(type = "newstories") {
     setErrors([]);
 
     try {
+      if (!storyTypeChips.some((chip) => chip.keyword === type)) {
+        throw new Error(
+          "The page you are looking for does not exist. Please go back to the homepage."
+        );
+      }
       const res = await fetch(
         `https://hacker-news.firebaseio.com/v0/${type}stories.json`
       );
 
       if (!res.ok) {
-        throw new Error("Failed to fetch stories.");
+        throw new Error("Failed to fetch stories. Please try again later");
       }
 
       const ids = await res.json();
 
       if (!Array.isArray(ids)) {
-        throw new Error("Invalid data format.");
+        throw new Error("Invalid data format. Please try again later");
       }
 
       setAllIds(ids);
@@ -47,7 +52,18 @@ export function useStories(type = "newstories") {
       setErrors(newStories.errors);
       setNextIndex(firstBatch.length);
     } catch (err: any) {
-      setErrors([{ id: -1, message: err.message || "Unknow error occured." }]);
+      if (err instanceof TypeError)
+        setErrors([
+          {
+            id: -1,
+            message: "Failed to fetch stories. Please try again later",
+          },
+        ]);
+      else {
+        setErrors([
+          { id: -1, message: err.message || "Unknow error occured." },
+        ]);
+      }
     } finally {
       setLoading(false);
     }
@@ -55,14 +71,7 @@ export function useStories(type = "newstories") {
 
   //call initial fetches
   useEffect(() => {
-    if (storyTypeChips.some((chip) => chip.keyword === type)) {
-      init().catch(() => {
-        setErrors([{ id: -1, message: "Couldn't fetch story IDs." }]);
-        setLoading(false); // optional but safe
-      });
-    } else {
-      setErrors([{ id: -1, message: "Stories not found." }]);
-    }
+    init();
   }, [init]);
 
   //function fetches one batch of stories frm current index
@@ -94,7 +103,10 @@ export function useStories(type = "newstories") {
         if (!res.ok) {
           return {
             story: null,
-            error: { id, message: `unable to fetch stories.` },
+            error: {
+              id,
+              message: `unable to fetch stories. Please try again later.`,
+            },
           };
         }
 
@@ -103,7 +115,11 @@ export function useStories(type = "newstories") {
         if (!data || typeof data !== "object") {
           return {
             story: null,
-            error: { id, message: "Invalid JSON or empty response." },
+            error: {
+              id,
+              message:
+                "Invalid JSON or empty response. Please try again later.",
+            },
           };
         }
 
@@ -111,20 +127,20 @@ export function useStories(type = "newstories") {
       } catch (err: any) {
         return {
           story: null,
-          error: { id, message: err.message || "Unknown fetch error." },
+          error: {
+            id,
+            message:
+              err.message || "Unknown fetch error. Please try again later.",
+          },
         };
       }
     });
 
     const results = await Promise.all(storyPromises);
 
-    const stories = results
-      .map((r) => r.story)
-      .filter((s): s is Story => s !== null);
+    const stories = results.map((r) => r.story).filter(Boolean);
 
-    const errors = results
-      .map((r) => r.error)
-      .filter((e): e is FetchError => e !== null);
+    const errors = results.map((r) => r.error).filter(Boolean);
 
     return { stories, errors };
   };

@@ -1,0 +1,26 @@
+.news-card-container {
+  all: "unset";
+  background-color: #fff;
+  border-radius: 12px;
+  color: black;
+  cursor: "pointer";
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  text-decoration: none;
+}
+
+.news-title {
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.news-description {
+  font-size: 14px;
+}
+
+.time-and-author {
+  color: var(--grey-text);
+}

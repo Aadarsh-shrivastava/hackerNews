@@ -7,3 +7,19 @@
   padding: 18px;
   scrollbar-width: none;
 }
+
+.chips-container {
+  display: flex;
+  gap: 10px;
+}
+
+.activity-indicator {
+  margin: auto;
+}
+
+.fallback-message,
+.end-of-feed-message {
+  font-weight: bolder;
+  margin: auto;
+  text-align: center;
+}

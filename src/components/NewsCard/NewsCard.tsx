@@ -1,7 +1,7 @@
 import React from "react";
-import "./NewsCard.css";
 import { Story } from "../../types/News";
 import { timeAgo } from "../../utils/caulculateTime";
+import "./NewsCard.css";
 
 interface NewsCardProps {
   story: Story;

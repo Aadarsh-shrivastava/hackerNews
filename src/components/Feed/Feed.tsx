@@ -13,5 +13,4 @@ export const Feed = () => {
       ))}
       {!loading && stories.length > 0 && <LoadMoreButton onClick={loadMore} />}
     </div>
-  );
-};
+ );

@@ -10,7 +10,7 @@ export function useStories(type = "newstories") {
   const [nextIndex, setNextIndex] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
 
-  // initial functio to fetch all ids and fetch initial batch of stories
+  // initial function to fetch all ids and fetch initial batch of stories
   const init = useCallback(async () => {
     setLoading(true);
     setStories([]);
@@ -54,7 +54,7 @@ export function useStories(type = "newstories") {
   //function fetches stories from a list of ids
   const fetchStoriesByIds = async (ids: number[]) => {
     const storyPromises = ids.map((id) =>
-      fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then(
+      fetch(`https://hacker-news.firebaseio.com/v0/iem/${id}.json`).then(
         (res) => res.json()
       )
     );

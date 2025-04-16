@@ -40,17 +40,18 @@ jest.mock("../chip/Chip", () => ({
 jest.mock("../../hooks/useStories");
 
 const mockedUseStories = useStories as jest.Mock;
+const mockUserStoriesResponse = {
+  stories: stories,
+  loading: false,
+  loadMore: jest.fn(),
+  hasMore: false,
+  errors: [],
+};
 
 describe("add list button component", () => {
   beforeEach(() => {
     mockedUseStories.mockClear();
-    mockedUseStories.mockReturnValue({
-      stories: stories,
-      loading: false,
-      loadMore: jest.fn(),
-      hasMore: false,
-      errors: [],
-    });
+    mockedUseStories.mockReturnValue(mockUserStoriesResponse);
   });
 
   it("renders chips and selects the first by default", () => {
@@ -65,14 +66,6 @@ describe("add list button component", () => {
   });
 
   it("renders NewsCard components for each story with correct test IDs", async () => {
-    mockedUseStories.mockReturnValue({
-      stories: stories,
-      loading: false,
-      loadMore: jest.fn(),
-      hasMore: false,
-      errors: [],
-    });
-
     render(
       <MemoryRouter>
         <Feed />
@@ -88,11 +81,8 @@ describe("add list button component", () => {
 
   it("shows loading indicator when loading is true", () => {
     mockedUseStories.mockReturnValue({
-      stories: [],
+      ...mockUserStoriesResponse,
       loading: true,
-      loadMore: jest.fn(),
-      hasMore: false,
-      errors: [],
     });
 
     render(
@@ -109,11 +99,9 @@ describe("add list button component", () => {
     const loadMore = jest.fn();
 
     mockedUseStories.mockReturnValue({
-      stories: stories,
-      loading: false,
+      ...mockUserStoriesResponse,
       loadMore,
       hasMore: true,
-      errors: [],
     });
 
     render(
@@ -129,14 +117,11 @@ describe("add list button component", () => {
     expect(loadMore).toHaveBeenCalled();
   });
 
-  it("shows Load More button when hasMore is true and not loading", async () => {
-    const loadMore = jest.fn();
+  it("shows a end mesage when hasmore is false and not loading", async () => {
     mockedUseStories.mockReturnValue({
-      stories: [{ id: 1, title: "More News" }],
+      ...mockUserStoriesResponse,
       loading: false,
-      loadMore,
-      hasMore: true,
-      errors: [],
+      hasMore: false,
     });
 
     render(
@@ -144,21 +129,12 @@ describe("add list button component", () => {
         <Feed />
       </MemoryRouter>
     );
-    const button = screen.getByText("Load More");
-    expect(button).toBeInTheDocument();
-
-    await userEvent.click(button);
-    expect(loadMore).toHaveBeenCalled();
+    const endMessage = screen.getByText("You've reached the end.");
+    expect(endMessage).toBeInTheDocument();
   });
 
   it("changes chip selection and triggers hook again", async () => {
-    mockedUseStories.mockReturnValue({
-      stories: [],
-      loading: false,
-      loadMore: jest.fn(),
-      hasMore: false,
-      errors: [],
-    });
+    mockedUseStories.mockReturnValue(mockUserStoriesResponse);
 
     render(
       <MemoryRouter>
@@ -174,10 +150,7 @@ describe("add list button component", () => {
 
   it("renders error message when errors are present and not loading", () => {
     mockedUseStories.mockReturnValue({
-      stories: [],
-      loading: false,
-      loadMore: jest.fn(),
-      hasMore: false,
+      ...mockUserStoriesResponse,
       errors: [{ message: "Something went wrong" }],
     });
 
@@ -190,6 +163,25 @@ describe("add list button component", () => {
     );
 
     const errorMessage = screen.getByText("Something went wrong");
+    expect(errorMessage).toBeInTheDocument();
+    expect(errorMessage).toHaveClass("error-message");
+  });
+
+  it("renders fallback message when no stories are present and not loading", () => {
+    mockedUseStories.mockReturnValue({
+      ...mockUserStoriesResponse,
+      stories: [],
+    });
+
+    render(
+      <MemoryRouter>
+        <Feed />
+      </MemoryRouter>
+    );
+
+    const errorMessage = screen.getByText(
+      "No stories available at the moment. Please check back later."
+    );
     expect(errorMessage).toBeInTheDocument();
     expect(errorMessage).toHaveClass("fallback-message");
   });

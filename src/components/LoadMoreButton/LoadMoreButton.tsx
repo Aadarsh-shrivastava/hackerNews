@@ -11,6 +11,7 @@ export const LoadMoreButton = ({
 }: LoadMoreButtonProps) => {
   return (
     <button
+      data-testid="loading-indicator"
       className={`load-more-button ${isEnabled ? "button-enabled" : ""}  `}
       onClick={() => {
         onClick && onClick();
@@ -21,4 +22,3 @@ export const LoadMoreButton = ({
     </button>
   );
 };
-

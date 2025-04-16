@@ -5,7 +5,7 @@ import "./Footer.css";
 export const Footer = () => {
   return (
     <div className="footer-container">
-      <img src={logo} data-testid="footer-logo" />
+      <img src={logo} />
     </div>
   );
 };

@@ -19,7 +19,7 @@ export const Feed = () => {
   if (!loading && errors.length) {
     return (
       <div className="feed-container">
-        <span className="fallback-message">{errors[0].message}</span>
+        <span className="error-message">{errors[0].message}</span>
       </div>
     );
   }
@@ -42,6 +42,7 @@ export const Feed = () => {
         stories.map((story) => <NewsCard key={story.id} story={story} />)}
 
       {loading ? (
+
         <div className="activity-indicator" data-testid="loading-indicator">
           <Dots />
         </div>

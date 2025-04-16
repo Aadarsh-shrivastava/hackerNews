@@ -6,7 +6,7 @@ export default {
         "\\.(css|scss)$": "identity-obj-proxy", // Mock style imports
     },
     preset: "ts-jest",
-    testEnvironment: 'jest-fixed-jsdom',
+    testEnvironment: "jsdom",
     setupFilesAfterEnv: ["@testing-library/jest-dom"],
     clearMocks: true,
 };

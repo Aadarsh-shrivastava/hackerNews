@@ -17,7 +17,6 @@ export const LoadMoreButton = ({
         onClick && onClick();
       }}
       disabled={!isEnabled}
-      data-testid="load-more-button"
     >
       Load More
     </button>

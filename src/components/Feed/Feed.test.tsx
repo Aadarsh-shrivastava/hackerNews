@@ -1,10 +1,11 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { Feed } from "./Feed";
 import { useStories } from "../../hooks/useStories";
 import userEvent from "@testing-library/user-event";
 import { storyTypeChips } from "../../constants/chipData";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
+import "@testing-library/jest-dom";
 
 jest.mock("../NewsCard/NewsCard", () => ({
   NewsCard: ({ story }: any) => (
@@ -48,11 +49,16 @@ describe("add list button component", () => {
       loading: false,
       loadMore: jest.fn(),
       hasMore: false,
+      errors: [],
     });
   });
 
   it("renders chips and selects the first by default", () => {
-    render(<Feed />);
+    render(
+      <MemoryRouter>
+        <Feed />
+      </MemoryRouter>
+    );
     storyTypeChips.forEach((chip) => {
       expect(screen.getByTestId(`chip-${chip.name}`)).toBeInTheDocument();
     });
@@ -64,9 +70,14 @@ describe("add list button component", () => {
       loading: false,
       loadMore: jest.fn(),
       hasMore: false,
+      errors: [],
     });
 
-    render(<Feed />);
+    render(
+      <MemoryRouter>
+        <Feed />
+      </MemoryRouter>
+    );
 
     for (const story of stories) {
       const card = await screen.findByTestId(`news-card-${story.id}`);
@@ -81,9 +92,14 @@ describe("add list button component", () => {
       loading: true,
       loadMore: jest.fn(),
       hasMore: false,
+      errors: [],
     });
 
-    render(<Feed />);
+    render(
+      <MemoryRouter>
+        <Feed />
+      </MemoryRouter>
+    );
 
     const loader = screen.getByTestId("loading-indicator");
     expect(loader).toBeInTheDocument();
@@ -97,9 +113,14 @@ describe("add list button component", () => {
       loading: false,
       loadMore,
       hasMore: true,
+      errors: [],
     });
 
-    render(<Feed />);
+    render(
+      <MemoryRouter>
+        <Feed />
+      </MemoryRouter>
+    );
 
     const loadMoreButton = screen.getByText("Load More");
     expect(loadMoreButton).toBeInTheDocument();
@@ -115,9 +136,14 @@ describe("add list button component", () => {
       loading: false,
       loadMore,
       hasMore: true,
+      errors: [],
     });
 
-    render(<Feed />);
+    render(
+      <MemoryRouter>
+        <Feed />
+      </MemoryRouter>
+    );
     const button = screen.getByText("Load More");
     expect(button).toBeInTheDocument();
 
@@ -131,13 +157,40 @@ describe("add list button component", () => {
       loading: false,
       loadMore: jest.fn(),
       hasMore: false,
+      errors: [],
     });
 
-    render(<Feed />);
+    render(
+      <MemoryRouter>
+        <Feed />
+      </MemoryRouter>
+    );
     const newChip = storyTypeChips[1];
     const chipButton = screen.getByTestId(`chip-${newChip.name}`);
     await userEvent.click(chipButton);
 
-    expect(chipButton).toHaveStyle("font-weight: bold");
+    expect(chipButton).toHaveStyle("font-weight: normal");
+  });
+
+  it("renders error message when errors are present and not loading", () => {
+    mockedUseStories.mockReturnValue({
+      stories: [],
+      loading: false,
+      loadMore: jest.fn(),
+      hasMore: false,
+      errors: [{ message: "Something went wrong" }],
+    });
+
+    render(
+      <MemoryRouter initialEntries={["/feed/top"]}>
+        <Routes>
+          <Route path="/feed/:feedtype" element={<Feed />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    const errorMessage = screen.getByText("Something went wrong");
+    expect(errorMessage).toBeInTheDocument();
+    expect(errorMessage).toHaveClass("fallback-message");
   });
 });

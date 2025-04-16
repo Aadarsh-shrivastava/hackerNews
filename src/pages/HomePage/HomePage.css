@@ -1,9 +1,12 @@
 .homepage-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .homepage-body {
+  display: flex;
   flex: 1;
+  flex-direction: column;
+  margin-top: 60px;
 }

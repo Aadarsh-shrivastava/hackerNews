@@ -12,7 +12,6 @@ export const NewsCard = ({ story }: NewsCardProps) => {
       href={story.url}
       target="_blank"
       rel="noopener noreferrer"
-      data-testid={`news-card-${story.id}`}
       className="news-card-container casts-shadow block no-underline text-inherit"
     >
       <div className="news-title">{story.title}</div>

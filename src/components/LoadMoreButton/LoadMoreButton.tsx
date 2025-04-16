@@ -2,8 +2,23 @@ import React from "react";
 import "./LoadMoreButton.css";
 
 interface LoadMoreButtonProps {
-  onClick: () => void;
+  onClick?: () => void;
+  isEnabled?: boolean;
 }
-export const LoadMoreButton = ({ onClick }: LoadMoreButtonProps) => {
-  return <div className="load-more-button casts-shadow" onClick={onClick}>Load More</div>;
+export const LoadMoreButton = ({
+  onClick,
+  isEnabled = true,
+}: LoadMoreButtonProps) => {
+  return (
+    <button
+      className={`load-more-button ${isEnabled ? "button-enabled" : ""}  `}
+      onClick={() => {
+        onClick && onClick();
+      }}
+      disabled={!isEnabled}
+    >
+      Load More
+    </button>
+  );
 };
+

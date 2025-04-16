@@ -1,5 +1,5 @@
 describe('News Feed App', () => {
-  it('loads 10 stories by default and loads more on button click', () => {
+  it('loads 5 stories by default and loads more on button click', () => {
     cy.visit('http://localhost:5173/');
 
     cy.get('[data-testid="loading-indicator"]').should('be.visible');

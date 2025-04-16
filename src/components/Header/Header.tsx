@@ -5,7 +5,7 @@ import "./Header.css";
 export const Header = () => {
   return (
     <a className="header-container casts-shadow" href="/">
-      <img src={Logo} />
+      <img src={Logo} data-testid="header-logo" />
     </a>
   );
 };

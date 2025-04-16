@@ -42,7 +42,7 @@ export const Feed = () => {
         stories.map((story) => <NewsCard key={story.id} story={story} />)}
 
       {loading ? (
-        <div className="activity-indicator " data-testid="loading-indicator">
+        <div className="activity-indicator" data-testid="loading-indicator">
           <Dots />
         </div>
       ) : stories.length ? (

@@ -11,14 +11,15 @@ export const LoadMoreButton = ({
 }: LoadMoreButtonProps) => {
   return (
     <button
+      data-testid="loading-indicator"
       className={`load-more-button ${isEnabled ? "button-enabled" : ""}  `}
       onClick={() => {
         onClick && onClick();
       }}
       disabled={!isEnabled}
+      data-testid="load-more-button"
     >
       Load More
     </button>
   );
 };
-

@@ -1,13 +1,30 @@
 .load-more-button {
   align-content: center;
-  background-color: var(--primary-color);
+  background-color: var(--grey);
   border-radius: 12px;
-  bottom: 120px; /* or wherever you want it vertically */
+  bottom: 120px;
+  cursor: pointer;
   font-size: 16px;
   font-weight: 700;
   left: 18px;
   min-height: 48px;
   right: 18px;
   text-align: center;
-  width: 100%;
+  width: 300px;
+}
+
+.button-enabled {
+  background-color: var(--primary-color);
+  box-shadow: 2px 5px 2px #0003;
+}
+
+.button-enabled:active {
+  box-shadow: none;
+  transform: translateY(1px);
+}
+
+@media (max-width: 400px) {
+  .load-more-button {
+    min-width: 100%;
+  }
 }

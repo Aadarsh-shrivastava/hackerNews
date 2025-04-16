@@ -22,7 +22,7 @@ describe("chip component test", () => {
 
   test("should call onclick function when clicked", async () => {
     render(<Chip chip={mockChip} isSelected={true} onClick={mockOnClick} />);
-    const chip = screen.getByTestId("chip");
+    const chip = screen.getByTestId("chip-New");
     await userEvent.click(chip);
     expect(mockOnClick).toHaveBeenCalled();
   });

@@ -8,7 +8,7 @@ type FetchError = {
   message: string;
 };
 // custom hook to fetch a list of ids first, based on those ids fetch list of paginated stories
-export function useStories(type = "newstories") {
+export function useStories(type: string) {
   const [allIds, setAllIds] = useState<number[]>([]);
   const [errors, setErrors] = useState<FetchError[]>([]);
   const [stories, setStories] = useState<Story[]>([]);
@@ -60,9 +60,7 @@ export function useStories(type = "newstories") {
           },
         ]);
       else {
-        setErrors([
-          { id: -1, message: err.message || "Unknow error occured." },
-        ]);
+        setErrors([{ id: -1, message: err.message }]);
       }
     } finally {
       setLoading(false);
@@ -76,8 +74,6 @@ export function useStories(type = "newstories") {
 
   //function fetches one batch of stories frm current index
   const loadMore = useCallback(async () => {
-    if (loading) return;
-
     const nextIds = allIds.slice(nextIndex, nextIndex + STORY_BATCH_SIZE);
     setLoading(true);
     const newStories = await fetchStoriesByIds(nextIds);
@@ -92,8 +88,6 @@ export function useStories(type = "newstories") {
   const fetchStoriesByIds = async (
     ids: number[]
   ): Promise<{ stories: Story[]; errors: FetchError[] }> => {
-    if (!ids || ids.length === 0) return { stories: [], errors: [] };
-
     const storyPromises = ids.map(async (id) => {
       try {
         const res = await fetch(
@@ -122,15 +116,13 @@ export function useStories(type = "newstories") {
             },
           };
         }
-
         return { story: data as Story, error: null };
       } catch (err: any) {
         return {
           story: null,
           error: {
             id,
-            message:
-              err.message || "Unknown fetch error. Please try again later.",
+            message: err.message,
           },
         };
       }

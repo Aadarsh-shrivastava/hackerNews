@@ -61,7 +61,7 @@ describe("useStories", () => {
 
     expect(result.current.loading).toBe(false);
     expect(result.current.stories.length).toBe(0);
-    expect(result.current.errors.length).toBeGreaterThan(0);
+    expect(result.current.errors.length).toBe(1);
   });
 
   it("loads more stories when load more is called", async () => {
@@ -138,7 +138,7 @@ describe("useStories", () => {
       await flushPromises();
     });
 
-    expect(result.current.errors.length).toBeGreaterThan(0);
+    expect(result.current.errors.length).toBe(1);
   });
 
   it("throws type error when fetch fails", async () => {
@@ -155,7 +155,7 @@ describe("useStories", () => {
       await flushPromises();
     });
 
-    expect(result.current.errors.length).toBeGreaterThan(0);
+    expect(result.current.errors.length).toBe(1);
   });
 
   it("handles network type error correctly", async () => {
@@ -174,7 +174,7 @@ describe("useStories", () => {
       await flushPromises();
     });
 
-    expect(result.current.errors.length).toBeGreaterThan(0);
+    expect(result.current.errors.length).toBe(1);
     expect(result.current.errors[0].message).toMatch(/failed to fetch/i);
   });
 
@@ -200,7 +200,7 @@ describe("useStories", () => {
     });
 
     expect(result.current.stories.length).toBe(0);
-    expect(result.current.errors.length).toBeGreaterThan(0);
+    expect(result.current.errors.length).toBe(5);
   });
 
   it("throws error when stories response is ok but data is invalid", async () => {
@@ -225,6 +225,6 @@ describe("useStories", () => {
     });
 
     expect(result.current.stories.length).toBe(0);
-    expect(result.current.errors.length).toBeGreaterThan(0);
+    expect(result.current.errors.length).toBe(5);
   });
 });

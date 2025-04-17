@@ -21,7 +21,8 @@
 }
 
 .fallback-message,
-.end-of-feed-message {
+.end-of-feed-message,
+.error-message {
   font-weight: bolder;
   margin: auto;
   text-align: center;
